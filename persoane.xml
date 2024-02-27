@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persoane>
+    <persoana id="1">
+        <nume>Popescu</nume>
+        <prenume>Ion</prenume>
+        <varsta>23</varsta>
+        <adresa>
+            <strada>Mircea cel Batran</strada>
+            <numar>22</numar>
+            <localitate>Iasi</localitate>
+            <judet>Iasi</judet>
+            <tara>Romania</tara>
+        </adresa>
+        <nrTel>0733348871</nrTel>
+        <emailAddress>popescu.ion@gmail.com</emailAddress>
+        <foreignLanguages>
+            <language id="1">Italiana</language>
+            <language id="2">Germana</language>
+        </foreignLanguages>
+    </persoana>
+    <persoana id="2">
+        <nume>Ionescu</nume>
+        <prenume>Pop</prenume>
+        <varsta>13</varsta>
+        <adresa>
+            <strada>Mircea cel Tinar</strada>
+            <numar>69</numar>
+            <localitate>Constanta</localitate>
+            <judet>Ilfov</judet>
+            <tara>Romania</tara>
+        </adresa>
+        <nrTel>0733348809</nrTel>
+        <emailAddress>ionescusmecherul123@gmail.com</emailAddress>
+        <foreignLanguages>
+            <language id="1">Engleza</language>
+            <language id="2">Franceza</language>
+        </foreignLanguages>
+    </persoana>
+    <persoana id="3">
+        <nume>Vasilache</nume>
+        <prenume>Andrei</prenume>
+        <varsta>21</varsta>
+        <adresa>
+            <strada>Savage Str</strada>
+            <numar>21</numar>
+            <localitate>New York</localitate>
+            <judet>New York</judet>
+            <tara>United States of America</tara>
+        </adresa>
+        <nrTel>(206) 342-8631</nrTel>
+        <emailAddress>21isthebest@yahoo.com</emailAddress>
+        <foreignLanguages>
+            <language id="1">Svenska</language>
+            <language id="2">Deutsch</language>
+        </foreignLanguages>
+    </persoana>
+</persoane>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Despre</title>
+    </head>
+
+    <body>
+        <h1>Programare web</h1>
+        <h2>Limbajul HTML</h2>
+
+        <p><b>HTML (HyperText Markup Language)</b> este un <i>limbaj de marcare</i> utilizat pentru a crea pagini web.</p>
+        <p style="margin-bottom: 0;">Un exemplu de cod html il gasiti in imaginea urmatoare care se afla la adresa <a href="http://upload.wikimedia.org/wikipedia/commons/e/e4/HTML_logo.png">http://upload.wikimedia.org/wikipedia/commons/e/e4/HTML_logo.png</a></p>
+        <p style="margin-bottom: 0; margin-top: 0;">Imaginea are atributul <span style="font-family: monospace;">height</span> de valoare 147.</p>
+        <img src="http://upload.wikimedia.org/wikipedia/commons/e/e4/HTML_logo.png" height="147">
+        <p style="margin-bottom: 0;"><b><i>Tag-urile</i></b> html cele mai utilizate in realizarea tabelelor sunt:</p>
+        <table border="1">
+                <tr>
+                    <td style="font-family: monospace;">table</td>
+                    <td>defineste un tabel</td>
+                </tr>
+                <tr>
+                    <td style="font-family: monospace;">tr</td>
+                    <td>un rand intr-un tabel</td>
+                </tr>
+                <tr>
+                    <td style="font-family: monospace;">td</td>
+                    <td>o celula intr-un tabel</td>
+                </tr>
+        </table>
+        <p style="margin-top: 0; margin-bottom: 0;"><b>Observatie:</b> Pentru a pune un contur unui tabel se poate (dar nu se recomanda) sa se puna atributul <span style="font-family: monospace; font-size: small;">border="1".</span></p>
+        <p style="margin-top: 0;">La validare va da eroarea: <i>The border attribute on the table element is obsolate.</i></p>
+        
+        <p style="margin-bottom: 0;">Formularele se pot crea cu ajutorul tag-ului <span style="font-family: monospace;font-size: small;">form</span> care poate contine tag-urile: <span style="font-family: monospace;font-size: small;">input, textarea, label, select, option, button.</span></p>
+        <p style="margin-top: 0;">Pentru mai multe detalii consultati cursul sau tutorialul <a href="https://www.w3schools.com/html/html_forms.asp">HTML Forms and Inputs</a> de la adresa <a href="https://www.w3schools.com/html/html_forms.asp">https://www.w3schools.com/html/html_forms.asp</a></p>
+        <p style="margin-bottom: 0;">Un exemplu de formular este urmatorul:</p>
+        <form>
+            <label for="nume">Nume: </label>
+            <input type="text" id="nume" name="nume" value="nume"><br>
+            <label for="prenume">Prenume: </label>
+            <input type="text" id="prenume" name="prenume" value="prenume"><br>
+            <label for="parola">Parola: </label>
+            <input type="password" id="parola" name="parola" value="pas"><br>
+            <label for="culoare">Culoare preferata: </label>
+            <select id="culoare" name="culoare">
+                <option>rosu</option>
+                <option>galben</option>
+                <option>albastru</option>
+                <option>roz</option>
+            </select><br>
+            <label for="casatext">Descriere: </label>
+            <textarea id="casatext" name="casatext" style="white-space: pre;" rows="3"></textarea><br>
+            <input type="checkbox" id="termeni" name="termeni">
+            <label for="termeni">Sunt de acord cu termenii si conditiile</label><br><br>
+
+            <button type="submit">Inregistreaza</button>
+        </form>
+
+
+    </body>
+    <hr>    <!--this for the horizontal line-->
+    <footer>
+        <span>&copy; 2023. Programare web</span>
+    </footer>
+</html>
