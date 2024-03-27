@@ -1,0 +1,41 @@
+header section{
+    margin-bottom: 0;
+    display: inline flex;
+}
+
+section img{
+        margin-bottom: 0;
+}
+
+section h1 {
+        font-size: 70px;
+        margin-bottom: 0px;
+        height: 50px;
+}
+
+nav a {
+        display: inline;
+        padding: 8px;
+        margin-bottom: 0;
+        margin-top: 0;
+        width: 100px;
+        background-color: #4db9c7;
+        margin-right: -4px;
+        text-decoration: none;
+        color:black;
+        font-size:x-large;
+        transition: background-color 0.3s, color 0.3s;
+}
+a:hover {
+        background-color: black;
+        color:#4db9c7;
+}
+
+/*  */
+.tabel-tehnologii td{
+    border-style: double;
+}
+
+.tabel-tehnologii {
+    border-style: double;
+}
