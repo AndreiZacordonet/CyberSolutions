@@ -30,28 +30,50 @@ while True:
             linieDeStart = cerere[0:pozitie]
             print('S-a citit linia de start din cerere: ##### ' + linieDeStart + '#####')
             resource = linieDeStart.split(' ')[1]
-            if resource == 'favicon.ico':
-                # is image
-                pass
+            # if resource == 'favicon.ico':
+            #     # is image
+            #     pass
             resource = 'continut' + resource
             print(resource + ", type: " + str(type(resource)))
             break
-    # clientsocket.sendall("<html><h1>Hhihihiaaa</h1></html>\r\n".encode())
-    response = ''
+
+    response = bytes()
+    tip = resource.split('.')[-1]
+    match tip:
+        case 'ico':
+            tip = "image/x-icon"
+        case 'png':
+            tip = 'image/png'
+        case 'jpeg' | 'jpg':
+            tip = 'image/jpeg'
+        case 'css':
+            tip = "text/css"
+        case 'html':
+            tip = 'text/html'
+        case 'js':
+            tip = 'application/javascript'
+        case _:
+            tip = 'text/plain'
+
+    # print(tip)
     try:
         print('calea: ' + resource)
-        f = open(resource, 'r', encoding='utf-8')
-        response = 'HTTP/1.1 200 OK' + '\r\n'
+        f = open(resource, 'rb')
         # citim fisierul
         file_content = f.read()
-        response += str(len(file_content)) + '\r\nhtml\r\n' + 'server_web' + '\r\n'
-        response += file_content + '\r\n'
+        f.close()
+        file_len = str(len(file_content))
+        response = 'HTTP/1.1 200 OK\r\n'.encode()
+        response += f'Content-Length: {file_len}'.encode()
+        response += f'Content-Type: {tip}\r\n'.encode()
+        response += f'Server: localhost\r\n\r\n'.encode()
+        response += file_content
     except FileNotFoundError:
         print('Fisierul nu a fost gasit')
-        response = 'HTTP/1.1 404 Not Found' + '\r\n'
+        response = ('HTTP/1.1 404 Not Found\r\n').encode()
     finally:
         print(response)
-        clientsocket.sendall(response.encode())
+        clientsocket.sendall(response)
         clientsocket.close()
     # clientsocket.sendall(open(resource, 'rb').read() + '\r\n'.encode())
     # clientsocket.sendall('\r\n'.encode())

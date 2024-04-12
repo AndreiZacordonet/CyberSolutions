@@ -1,1 +1,1 @@
-C:\Users\andre\AppData\Local\Programs\Python\Python310\python.exe
+C:\Users\andre\OneDrive\Desktop\Materii\Anul_III\Semestrul_II\PW\proiect-1-AndreiZacordonet\server_web\server_web.py
