@@ -1,35 +1,133 @@
-header section{
-    margin-bottom: 0;
-    display: inline flex;
+body {
+        margin: 0;
 }
 
-section img{
-        margin-bottom: 0;
+.flex-container {
+        display: flex;
+        background-color: #4db9c7;
+      }
+
+
+
+/* header > section img{
+        margin: 0;
+        display: inline;
 }
 
-section h1 {
+header > section h1 {
         font-size: 70px;
-        margin-bottom: 0px;
+        margin: 0;
+        width:max-content;
         height: 50px;
-}
+        display: inline;
+} */
+
+#numecompanie {
+        display: flex; 
+        align-items: center; 
+        background-color: #20608B;
+    }
+    
+    #numecompanie img {
+        margin-right: 10px;
+    }
+    
+    #numecompanie h1 {
+        margin: 0; 
+        font-size: 70px; 
+        color: white;
+    }
+
+
+
+
 
 nav a {
         display: inline;
-        padding: 8px;
-        margin-bottom: 0;
-        margin-top: 0;
-        width: 100px;
+        padding: 18px;
+        margin: 0;
+        width: fit-content;
         background-color: #4db9c7;
-        margin-right: -4px;
         text-decoration: none;
         color:black;
         font-size:x-large;
-        transition: background-color 0.3s, color 0.3s;
+        transition: background-color 0.1s, color 0.1s;
 }
 a:hover {
         background-color: black;
         color:#4db9c7;
 }
+
+.sidebar {
+        width: 250px; 
+        background-color: #f4f4f4; 
+        padding: 20px; 
+        float: right;
+        height: 100%; 
+}
+
+/* Sidebar */
+.sidebar {
+        background-color: #20608B;
+        color: white;
+        padding: 20px;
+    }
+    
+    /* Sidebar heading */
+    .sidebar h2 {
+        color: white;
+        text-align: center;
+    }
+        /* Sidebar links + hovering */
+    /* .sidebar a {
+        color: white;
+    }
+    .sidebar a:hover {
+        color: #4db9c7;
+    } */
+
+#continut {
+        margin-right: 270px;
+        padding: 20px;
+        overflow: hidden;
+}
+
+
+
+/*Main-ul*/
+    
+    h2 {
+        color: #20608B;
+        border-bottom: 2px solid #4db9c7;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+    
+    section {
+        color: black;
+        line-height: 1.5;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+    
+    /* Article headings */
+    article strong {
+        color: #4db9c7;
+        font-size: 20px;
+    }
+    /* Article content */
+    article span {
+        color: black;
+    }
+    
+    /* Links */
+    a {
+        color: #20608B;
+    }
+    a:hover {
+        color: #4db9c7; 
+    }
+    
 
 /*  */
 .tabel-tehnologii td{
@@ -39,3 +137,5 @@ a:hover {
 .tabel-tehnologii {
     border-style: double;
 }
+
+
