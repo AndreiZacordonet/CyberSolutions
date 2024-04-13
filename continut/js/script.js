@@ -17,7 +17,7 @@ function headerTemplate(){
             <h1 style="margin-top: 0;">CyberSolutions</h1>
         </section>
 
-        <nav>
+        <nav class="flex-container">
             <a onclick="schimbaContinut('acasa')">Acasă</a>
             <a onclick="schimbaContinut('despre')">Despre</a>
             <a onclick="schimbaContinut('inregistreaza')">Înregistrează-te</a>
@@ -25,10 +25,24 @@ function headerTemplate(){
             <a onclick="schimbaContinut('video')">Videoclipuri</a>
             <a onclick="schimbaContinut('invat')">Învăț</a>
         </nav>
+
+        <aside class="sidebar" id="aside">
+            <h2 >News</h2>
+        </aside>
     `;
     element = document.getElementById('header');
     element.appendChild(template.content);
 }
+
+//sidebar template
+// function asideTemplate(){
+//     const template = document.createElement('template');
+//     template.innerHTML = `
+//         <h2 style="text-align: center;">News</h2>
+//     `;
+//     element = document.getElementById('aside');
+//     element.appendChild(template.content);
+// }
 
 // OLD FUNCTION (NAV WITHOUT AJAX)
 // function headerTemplate(){
