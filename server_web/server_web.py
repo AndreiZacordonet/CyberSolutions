@@ -25,6 +25,7 @@ while True:
         data = clientsocket.recv(1024)
         cerere = cerere + data.decode()
         if not cerere:
+            # receive data is empty
             print(f'Cerere {cerere} goala')
             clientsocket.close()
             break
@@ -39,8 +40,9 @@ while True:
             break
     
     if not resource:
+        # received data is empty
         continue
-    
+
     response = bytes()
     tip = resource.split('.')[-1]
     match tip:
@@ -70,18 +72,15 @@ while True:
         response = 'HTTP/1.1 200 OK\r\n'.encode()
         response += f'Content-Length: {str(len(file_content))}\r\n'.encode()
         response += f'Content-Type: {tip}\r\n'.encode()
-        response += f'Server: localhost\r\n\r\n'.encode()
+        response += 'Server: localhost\r\n\r\n'.encode()
         response += file_content
     except FileNotFoundError:
         print('Fisierul nu a fost gasit')
-        response = ('HTTP/1.1 404 Not Found\r\n').encode()
+        response = 'HTTP/1.1 404 Not Found\r\n'.encode()
     finally:
         print(response)
         clientsocket.sendall(response)
         clientsocket.close()
 
 print('S-a terminat cititrea.')
-# TODO interpretarea sirului de caractere `linieDeStart` pentru a extrage numele resursei cerute
-# TODO trimiterea răspunsului HTTP
-clientsocket.close()
 print('S-a terminat comunicarea cu clientul.')
