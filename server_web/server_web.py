@@ -24,19 +24,23 @@ while True:
     while True:
         data = clientsocket.recv(1024)
         cerere = cerere + data.decode()
+        if not cerere:
+            print(f'Cerere {cerere} goala')
+            clientsocket.close()
+            break
         print('S-a citit mesajul: \n---------------------------\n' + cerere + '\n---------------------------')
         pozitie = cerere.find('\r\n')
         if pozitie > -1:
             linieDeStart = cerere[0:pozitie]
             print('S-a citit linia de start din cerere: ##### ' + linieDeStart + '#####')
             resource = linieDeStart.split(' ')[1]
-            # if resource == 'favicon.ico':
-            #     # is image
-            #     pass
             resource = 'continut' + resource
             print(resource + ", type: " + str(type(resource)))
             break
-
+    
+    if not resource:
+        continue
+    
     response = bytes()
     tip = resource.split('.')[-1]
     match tip:
@@ -52,19 +56,19 @@ while True:
             tip = 'text/html'
         case 'js':
             tip = 'application/javascript'
+        case 'xml':
+            tip = 'text/xml'
         case _:
             tip = 'text/plain'
 
-    # print(tip)
     try:
         print('calea: ' + resource)
         f = open(resource, 'rb')
         # citim fisierul
         file_content = f.read()
         f.close()
-        file_len = str(len(file_content))
         response = 'HTTP/1.1 200 OK\r\n'.encode()
-        response += f'Content-Length: {file_len}'.encode()
+        response += f'Content-Length: {str(len(file_content))}\r\n'.encode()
         response += f'Content-Type: {tip}\r\n'.encode()
         response += f'Server: localhost\r\n\r\n'.encode()
         response += file_content
@@ -75,9 +79,7 @@ while True:
         print(response)
         clientsocket.sendall(response)
         clientsocket.close()
-    # clientsocket.sendall(open(resource, 'rb').read() + '\r\n'.encode())
-    # clientsocket.sendall('\r\n'.encode())
-    # clientsocket.close()
+
 print('S-a terminat cititrea.')
 # TODO interpretarea sirului de caractere `linieDeStart` pentru a extrage numele resursei cerute
 # TODO trimiterea răspunsului HTTP
