@@ -69,8 +69,19 @@ function headerTemplate(){
 function footerTemplate(){
     const template = document.createElement('template');
     template.innerHTML = `
-        <hr>    <!--this for the horizontal line-->
-        <span>&copy; 2024. CyberSolutions. All rights reserved.</span>
+        <nav>
+            <a onclick="schimbaContinut('acasa')">Acasă</a>
+            <a onclick="schimbaContinut('despre')">Despre</a>
+            <a onclick="schimbaContinut('inregistreaza')">Înregistrează-te</a>
+            <a onclick="schimbaContinut('desen')">Desene</a>
+            <a onclick="schimbaContinut('video')">Videoclipuri</a>
+            <a onclick="schimbaContinut('invat')">Învăț</a>
+        </nav>
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/" class="social"><img src="imagini/linkedin-icon.jpg" alt="LinkedIn"></a>
+            <a href="https://www.facebook.com/" class="social"><img src="imagini/facebook-icon.jpg" alt="Facebook"></a>
+        </div>
+        <div style="padding-left: 20px;">&copy; 2024. CyberSolutions. All rights reserved.</div>
     `;
     element = document.getElementById('footer');
     element.appendChild(template.content);

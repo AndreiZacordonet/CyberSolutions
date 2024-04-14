@@ -87,9 +87,15 @@ a:hover {
     } */
 
 #continut {
-        margin-right: 270px;
-        padding: 20px;
+        /* margin-right: 270px; */
+        /* padding: 20px; */
         overflow: hidden;
+}
+
+#continut::after {
+    content: '';
+    display: block; 
+    height: 60px;
 }
 
 
@@ -139,3 +145,60 @@ a:hover {
 }
 
 
+/* Footer styles */
+footer {
+    display: flex;
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+    background-color: #20608B;
+    position: fixed;
+    bottom: 0;
+}
+
+/* Horizontal line */
+/* hr {
+    border: none;
+    border-top: 1px solid #20608B;
+} */
+
+/* Navigation links */
+footer > nav a {
+    color: black;
+    padding: 0;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+/* Hover effect for navigation links */
+nav a:hover {
+    color: #4db9c7;
+}
+
+/* Social icons */
+.social-icons img {
+    width: 30px; 
+    margin: 0;
+}
+
+
+
+/* Tabel despre */
+.tabel-tehnologii {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+}
+
+.header {
+    font-weight: bold;
+}
+
+.cell {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #000;
+}
