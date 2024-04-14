@@ -26,6 +26,8 @@ function headerTemplate(){
             <a onclick="schimbaContinut('invat')">Învăț</a>
         </nav>
 
+        <!-- <button onclick="toggleDropdown()">Meniu</button> -->
+
         <aside class="sidebar" id="aside">
             <h2 >News</h2>
         </aside>
@@ -69,7 +71,7 @@ function headerTemplate(){
 function footerTemplate(){
     const template = document.createElement('template');
     template.innerHTML = `
-        <nav>
+        <nav id="main-menu">
             <a onclick="schimbaContinut('acasa')">Acasă</a>
             <a onclick="schimbaContinut('despre')">Despre</a>
             <a onclick="schimbaContinut('inregistreaza')">Înregistrează-te</a>
@@ -94,4 +96,9 @@ function schimbaContinut(file){
     }
     xhttp.open("GET", file + '.html');
     xhttp.send();
+}
+
+function toggleDropdown() {
+    var dropdownMenu = document.getElementById("main-menu");
+    dropdownMenu.classList.toggle("dropdown-menu");
 }

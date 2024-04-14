@@ -1,5 +1,6 @@
-<form>
-    <h3>Informații generale</h3>
+<form class="regForm">
+    <section>
+       <h3 class="regForm">Informații generale</h3>
     Nume utilizator: <input type="text" id="nume_utilizator" name="nume_utilizator" placeholder="Andrei74C0">
     <br>
     Parola: <input type="password" id="parola" name="parola" >
@@ -10,36 +11,38 @@
     <br>
     Email: <input type="email" id="email" name="email" placeholder="andrei.zacordonet@gmail.com">
     <br>
-    Telefon: <input type="tel" id="telefon" name="telefon" placeholder="0754374397">
-    <br>
-    <br>
+    Telefon: <input type="tel" id="telefon" name="telefon" placeholder="0754374397"> 
+    </section>
+
+    <section>
+        <h3 class="regForm">Informații personale</h3>
+        Sex: <select id="sex" name="sex">
+                <option>Masculin</option>
+                <option>Feminin</option>
+                </select>
+        <br>
+        Mâncarea preferată: <input list="mancare_preferata" id="mancare" name="mancare">
+                            <datalist id="mancare_preferata">
+                                <option>Salată</option>
+                                <option>Paste Carbonara</option>
+                                <option>Pizza cu Ton</option>
+                                <option>Taco</option>
+                            </datalist>
+        <br>
+        Culoarea preferată: <input type="color" id="culoare" name="culoare">
+        <br>
+        Data nașterii: <input type="date" id="data_nastere" name="data_nastere">
+        <br>
+        Ora nașterii: <input type="time" id="ora_nastere" name="ora_nastere">
+        <br>
+        Vârstă: <input type="range" id="varsta" name="varsta" min="18">
+        <br>
+        Adresa paginii personale: <input type="url" id="adresa_pagina_personala" name="adresa_pagina_personala">
+        <br>
+        Descriere: <br> <textarea id="descriere" name="descriere" placeholder="Share what describes you the best" rows="4" cols="50"></textarea>
     
-    <h3>Informații personale</h3>
-    Sex: <select id="sex" name="sex">
-            <option>Masculin</option>
-            <option>Feminin</option>
-            </select>
-    <br>
-    Mâncarea preferată: <input list="mancare_preferata" id="mancare" name="mancare">
-                        <datalist id="mancare_preferata">
-                            <option>Salată</option>
-                            <option>Paste Carbonara</option>
-                            <option>Pizza cu Ton</option>
-                            <option>Taco</option>
-                        </datalist>
-    <br>
-    Culoarea preferată: <input type="color" id="culoare" name="culoare">
-    <br>
-    Data nașterii: <input type="date" id="data_nastere" name="data_nastere">
-    <br>
-    Ora nașterii: <input type="time" id="ora_nastere" name="ora_nastere">
-    <br>
-    Vârstă: <input type="range" id="varsta" name="varsta" min="18">
-    <br>
-    Adresa paginii personale: <input type="url" id="adresa_pagina_personala" name="adresa_pagina_personala">
-    <br>
-    Descriere: <br> <textarea id="descriere" name="descriere" placeholder="Share what describes you the best" rows="4" cols="50"></textarea>
-    <br>
-    <br>
-    <button disabled>Înregistrează</button>
+        <br>
+        <br>
+        <button disabled>Înregistrează</button>
+    </section>
 </form>
