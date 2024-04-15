@@ -79,33 +79,34 @@ function footerTemplate(){
 }
 
 //--------------------------------------------------------------------------------------------------------------//
+// system details
+{
+    function initialLoad() {
+        // date time info
+        window.savedInterval = setInterval(() => {
+            document.getElementById('oraData').innerHTML =  new Date().toLocaleString();;
+        }, 1000);
+        // rest of data
+        displayAllInfo();
+    }
 
-function initialLoad() {
-    // date time info
-    window.savedInterval = setInterval(() => {
-        document.getElementById('oraData').innerHTML =  new Date().toLocaleString();;
-    }, 1000);
-    // rest of data
-    displayAllInfo();
+    function displayAllInfo() {
+        // URL address
+        document.getElementById('URL').innerHTML = window.location.href;
+
+        // operating system data
+        document.getElementById('so').innerHTML = /\(([^)]+)\)/.exec(window.navigator.userAgent)[1];
+
+        // browser data
+        document.getElementById('browser').innerHTML = window.navigator.userAgent.replace(/ *\([^)]*\)*/g, "");
+
+        // location data
+        navigator.geolocation.getCurrentPosition((position) => {
+                        document.getElementById("location").innerHTML = 
+                        "<br>Latitude: " + position.coords.latitude + 
+                        "<br>Longitude: " + position.coords.longitude;});
+    }
 }
-
-function displayAllInfo() {
-    // URL address
-    document.getElementById('URL').innerHTML = window.location.href;
-
-    // operating system data
-    document.getElementById('so').innerHTML = /\(([^)]+)\)/.exec(window.navigator.userAgent)[1];
-
-    // browser data
-    document.getElementById('browser').innerHTML = window.navigator.userAgent.replace(/ *\([^)]*\)*/g, "");
-
-    // location data
-    navigator.geolocation.getCurrentPosition((position) => {
-                    document.getElementById("location").innerHTML = 
-                    "<br>Latitude: " + position.coords.latitude + 
-                    "<br>Longitude: " + position.coords.longitude;});
-}
-
 //--------------------------------------------------------------------------------------------------------------//
 // canva
 {
@@ -115,6 +116,7 @@ function displayAllInfo() {
 
     const canvas = document.getElementById("myCanvas");
     const context = canvas.getContext("2d");
+    context.lineWidth = 5;
 
     canvas.addEventListener("mousedown", function(event) {
         const rect = canvas.getBoundingClientRect();
@@ -145,6 +147,79 @@ function displayAllInfo() {
         context.strokeRect(x1, y1, width, height);
         context.fillStyle = document.getElementById("intColor").value;
         context.fillRect(x1, y1, width, height);
+    }
+}
+
+//--------------------------------------------------------------------------------------------------------------//
+// dynamic tabel 
+{
+    document.getElementById('row').addEventListener('click', function(){
+        try{
+            const index = parseInt(document.getElementById('number').value);
+            if (typeof index !== 'number' || index === "")
+            {
+                throw new Error('Not a number');
+            }
+
+            const color = document.getElementById('color').value;
+            const table = document.getElementById('dynamicTable');
+            console.log(index + typeof(index));
+            const row = table.insertRow(index);
+            
+            for(let i = 0; i < table.rows[index == 1 ? index-1:1].cells.length; i++){
+                let cell = row.insertCell(i);
+                cell.innerHTML = "";
+                cell.style.backgroundColor = color;
+                cell.style.color = getComplementaryColor(color);
+                cell.contentEditable = true;
+            }
+        }
+        catch (error){
+            alert(error);
+        }
+    })
+
+    document.getElementById('column').addEventListener('click', function(){
+        try{
+            const index = parseInt(document.getElementById('number').value);
+            if (typeof index !== 'number' || index === "")
+            {
+                throw new Error('Not a number');
+            }
+
+            const color = document.getElementById('color').value;
+            const table = document.getElementById('dynamicTable');
+
+            for(let i = 0; i < table.rows.length; i++){
+                console.log(i + "index: " + index);
+                let cell = table.rows[i].insertCell(index);
+                cell.innerHTML = "";
+                cell.style.backgroundColor = color;
+                cell.style.color = getComplementaryColor(color);
+                cell.contentEditable = true;
+            }
+        }
+        catch (error){
+            alert(error);
+        }
+    })
+
+    function getComplementaryColor(color) {
+        // Remove # if present
+        color = color.replace('#', '');
+    
+        // Convert color to RGB
+        const hexToRgb = (hex) => hex.match(/.{2}/g).map((c) => parseInt(c, 16));
+        const rgb = hexToRgb(color);
+    
+        // Calculate complementary color
+        const complementaryColor = rgb.map((c) => 255 - c);
+    
+        // Convert RGB to hex
+        const rgbToHex = (rgb) => rgb.map((c) => Math.min(255, Math.max(0, c)).toString(16).padStart(2, '0')).join('');
+        const complementaryHex = rgbToHex(complementaryColor);
+    
+        return '#' + complementaryHex;
     }
 }
 

@@ -1,4 +1,11 @@
 <!-- MAIN -->
+<aside style="position: fixed; right: 300px; background-color: white; padding:10px">
+        <a href="#sysInfo">Secțiunea 1</a><br><br>
+        <a href="#canvas">Secțiunea 2</a><br><br>
+        <a href="#tabel">Secțiunea 3</a>
+</aside>
+
+
 <section id="sysInfo">
     <h2>Informații personale</h2>
     Ora și data curentă:
@@ -21,10 +28,99 @@
 <section id="canvas" style="margin-top: 30px;">
     <h2>Desenează!</h2>
     Selectează culoarea interiorului:<br>
-    <input type="color" id="intColor" value="#ff0000"><br>
+    <input type="color" id="intColor" value="#20608B"><br>
     Selectează culoarea marginilor:<br>
-    <input type="color" id="extColor" value="#ff0000"><br>
+    <input type="color" id="extColor" value="#4db9c7"><br>
     <button id="erase" style="margin-bottom: 5px;">Șterge</button><br>
 
     <canvas id="myCanvas" width="700" height="400" style="border:1px solid black" onload="canvaDraw()"></canvas>
+</section>
+
+<section id="tabel" style="margin-top: 30px; overflow: auto;">
+    <h2>Tech History</h2>
+    Introdu numărul liniei/coloanei:<br>
+    <input type="number" id="number" min="0"><br>
+    Alege culoarea liniei/coloanei:<br>
+    <input type="color" id="color"><br>
+    <button type="submit" id="row">Adaugă linie</button>
+    <button type="submit" id="column">Adaugă coloană</button>
+
+    <style>
+        #dynamicTable tr>td {
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+}
+    </style>
+    <table id="dynamicTable">
+        <tr>
+            <td>
+                Tehnologie
+            </td>
+            <td>
+                Tip
+            </td>
+            <td>
+                Anul lansării
+            </td>
+            <td>
+                Update:
+            </td>
+            <td>
+                2024
+            </td>
+        </tr>
+        <tr>
+            <td>
+                AddBlock Plus
+            </td>
+            <td>
+                Add Blocker
+            </td>
+            <td>
+                2005
+            </td>
+            <td>
+                Informații confidențiale
+            </td>
+            <td>
+                Noi funcționalități
+            </td>
+        </tr>
+        <tr>
+            <td>
+                AddBlock Plus
+            </td>
+            <td>
+                Add Blocker
+            </td>
+            <td>
+                2005
+            </td>
+            <td>
+                Informații confidențiale
+            </td>
+            <td>
+                Noi funcționalități
+            </td>
+        </tr>
+        <tr>
+            <td>
+                AddBlock Plus
+            </td>
+            <td>
+                Add Blocker
+            </td>
+            <td>
+                2005
+            </td>
+            <td>
+                Informații confidențiale
+            </td>
+            <td>
+                Noi funcționalități
+            </td>
+        </tr>
+    </table>
 </section>
