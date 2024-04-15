@@ -1,14 +1,3 @@
-// function displaySysDetails(){
-//     element = document.getElementById("oraData");
-//     element.innerHTML = Date();
-
-//     element = document.getElementById("URL");
-//     element.innerHTML = window.location.href;
-    
-//     element = document.getElementById("location");
-//     element.innerHTML = navigator.watchPosition();
-// }
-
 function headerTemplate(){
     const template = document.createElement('template');
     template.innerHTML = `
@@ -23,7 +12,7 @@ function headerTemplate(){
             <a onclick="schimbaContinut('inregistreaza')">Înregistrează-te</a>
             <a onclick="schimbaContinut('desen')">Desene</a>
             <a onclick="schimbaContinut('video')">Videoclipuri</a>
-            <a onclick="schimbaContinut('invat')">Învăț</a>
+            <a onclick="schimbaContinut('invat', 'initialLoad', 'js/script.js')">Învăț</a>
         </nav>
 
         <!-- <button onclick="toggleDropdown()">Meniu</button> -->
@@ -89,16 +78,50 @@ function footerTemplate(){
     element.appendChild(template.content);
 }
 
-function schimbaContinut(file){
+//--------------------------------------------------------------------------------------------------------------//
+
+function initialLoad() {
+    // date time info
+    window.savedInterval = setInterval(() => {
+        document.getElementById('oraData').innerHTML =  new Date().toLocaleString();;
+    }, 1000);
+    // rest of data
+    displayAllInfo();
+}
+
+function displayAllInfo() {
+    // URL address
+    document.getElementById('URL').innerHTML = window.location.href;
+
+    // operating system data
+    document.getElementById('so').innerHTML = /\(([^)]+)\)/.exec(window.navigator.userAgent)[1];
+
+    // browser data
+    document.getElementById('browser').innerHTML = window.navigator.userAgent.replace(/ *\([^)]*\)*/g, "");
+
+    // location data
+    navigator.geolocation.getCurrentPosition((position) => {
+                    document.getElementById("location").innerHTML = 
+                    "<br>Latitude: " + position.coords.latitude + 
+                    "<br>Longitude: " + position.coords.longitude;});
+}
+
+// ajax fun
+function schimbaContinut(file, jsFun, jsFile) {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
         document.getElementById("continut").innerHTML = this.responseText;
-    }
+
+        let script = document.createElement('script');
+        if (jsFun && jsFile)
+        {
+            script.src = jsFile;
+            script.onload = function(){
+                window[jsFun]();
+            };
+            document.body.appendChild(script);
+        }
+    };
     xhttp.open("GET", file + '.html');
     xhttp.send();
-}
-
-function toggleDropdown() {
-    var dropdownMenu = document.getElementById("main-menu");
-    dropdownMenu.classList.toggle("dropdown-menu");
 }

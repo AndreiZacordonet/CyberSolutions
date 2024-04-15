@@ -1,9 +1,35 @@
 <!-- MAIN -->
 <section id="sysInfo">
     Ora și data curentă:
-    <div id="oraData"></div>
+    <span id="oraData"></span><br>
+
     Adresa URL a paginii curente:
-    <div id="URL"></div>
+    <span id="URL"></span><br>
+    
+    Browser:
+    <span id="browser"></span><br>
+
+    Sistemul de operare:
+    <span id="so"></span><br>
+
     Locația curentă a utilizatorului:
-    <div id="location"></div>
+    <span id="location" onload="getLocation()"></span><br>
+
+    <script>
+        const x = document.getElementById("location");
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else { 
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            x.innerHTML = "Latitude: " + position.coords.latitude + 
+            "<br>Longitude: " + position.coords.longitude;
+        }
+    </script>
+    
 </section>
