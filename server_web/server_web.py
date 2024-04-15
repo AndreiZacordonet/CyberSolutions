@@ -1,4 +1,5 @@
 import socket
+import gzip
 # import imageio as iio
 
 # creeaza un server socket
@@ -60,6 +61,8 @@ while True:
             tip = 'application/javascript'
         case 'xml':
             tip = 'text/xml'
+        case 'gif':
+            tip = 'text/gif'
         case _:
             tip = 'text/plain'
 
@@ -69,9 +72,11 @@ while True:
         # citim fisierul
         file_content = f.read()
         f.close()
+        file_content = gzip.compress(file_content)
         response = 'HTTP/1.1 200 OK\r\n'.encode()
         response += f'Content-Length: {str(len(file_content))}\r\n'.encode()
-        response += f'Content-Type: {tip}\r\n'.encode()
+        response += f'Content-Type: {tip}; charset=utf-8\r\n'.encode()
+        response += 'Content-Encoding: gzip\r\n'.encode()
         response += 'Server: localhost\r\n\r\n'.encode()
         response += file_content
     except FileNotFoundError:
