@@ -66,7 +66,7 @@ function footerTemplate(){
             <a onclick="schimbaContinut('inregistreaza')">Înregistrează-te</a>
             <a onclick="schimbaContinut('desen')">Desene</a>
             <a onclick="schimbaContinut('video')">Videoclipuri</a>
-            <a onclick="schimbaContinut('invat')">Învăț</a>
+            <a onclick="schimbaContinut('invat', 'initialLoad', 'js/script.js')">Învăț</a>
         </nav>
         <div class="social-icons">
             <a href="https://www.linkedin.com/" class="social"><img src="imagini/linkedin-icon.jpg" alt="LinkedIn"></a>
@@ -106,6 +106,49 @@ function displayAllInfo() {
                     "<br>Longitude: " + position.coords.longitude;});
 }
 
+//--------------------------------------------------------------------------------------------------------------//
+// canva
+{
+    let isDrawing = false;
+    let startX = 0, startY = 0;
+    let endX = 0, endY = 0;
+
+    const canvas = document.getElementById("myCanvas");
+    const context = canvas.getContext("2d");
+
+    canvas.addEventListener("mousedown", function(event) {
+        const rect = canvas.getBoundingClientRect();
+        if (!isDrawing) {
+            startX = event.clientX - rect.left;
+            startY = event.clientY - rect.top;
+            isDrawing = true;
+        } else {
+            endX = event.clientX - rect.left;
+            endY = event.clientY - rect.top;
+            drawRectangle(startX, startY, endX, endY);
+            isDrawing = false;
+        }
+    });
+
+    canvas.addEventListener("mouseleave", function() {
+        isDrawing = false;
+    });
+
+    document.getElementById("erase").addEventListener("click", function() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    })
+
+    function drawRectangle(x1, y1, x2, y2) {
+        const width = x2 - x1;
+        const height = y2 - y1;
+        context.strokeStyle = document.getElementById("extColor").value;
+        context.strokeRect(x1, y1, width, height);
+        context.fillStyle = document.getElementById("intColor").value;
+        context.fillRect(x1, y1, width, height);
+    }
+}
+
+//--------------------------------------------------------------------------------------------------------------//
 // ajax fun
 function schimbaContinut(file, jsFun, jsFile) {
     const xhttp = new XMLHttpRequest();

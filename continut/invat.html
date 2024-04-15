@@ -1,5 +1,6 @@
 <!-- MAIN -->
 <section id="sysInfo">
+    <h2>Informații personale</h2>
     Ora și data curentă:
     <span id="oraData"></span><br>
 
@@ -13,23 +14,17 @@
     <span id="so"></span><br>
 
     Locația curentă a utilizatorului:
-    <span id="location" onload="getLocation()"></span><br>
+    <span id="location"></span><br>
 
-    <script>
-        const x = document.getElementById("location");
+</section>
 
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else { 
-                x.innerHTML = "Geolocation is not supported by this browser.";
-            }
-        }
+<section id="canvas" style="margin-top: 30px;">
+    <h2>Desenează!</h2>
+    Selectează culoarea interiorului:<br>
+    <input type="color" id="intColor" value="#ff0000"><br>
+    Selectează culoarea marginilor:<br>
+    <input type="color" id="extColor" value="#ff0000"><br>
+    <button id="erase" style="margin-bottom: 5px;">Șterge</button><br>
 
-        function showPosition(position) {
-            x.innerHTML = "Latitude: " + position.coords.latitude + 
-            "<br>Longitude: " + position.coords.longitude;
-        }
-    </script>
-    
+    <canvas id="myCanvas" width="700" height="400" style="border:1px solid black" onload="canvaDraw()"></canvas>
 </section>
