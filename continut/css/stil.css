@@ -350,29 +350,29 @@ input[type="time"] {
 /* -------------------------------------------------------------------------------------------- */
 
 /* Media query for screens narrower than 600px */
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
     body {
         font-size: 14px;
     }
 }
 
 /* Media query for screens wider than 1200px */
-@media (min-width: 1200px) {
+/* @media (min-width: 1200px) {
     body {
         font-size: 18px;
     }
-}
+} */
 
 /* Media query for screens between 600px and 1200px */
-@media (min-width: 600px) and (max-width: 1200px) {
+@media  (max-width: 600px) and (max-height: 1200px) {
     body {
-        font-size: 16px;
+        font-size: 45px;
     }
-}
+} 
 
 @media (max-width: 600px) {
     footer {
-        height: 50px;
+        height: 30px;
         padding: 10px;
     }
 }
@@ -392,9 +392,9 @@ input[type="time"] {
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
     header, footer {
-        font-size: 14px;
+        font-size: 50px;
         padding: 5px;
     }
     aside {
@@ -408,17 +408,17 @@ input[type="time"] {
     }
 
     #numecompanie img {
-        height: 100px; /* Adjust the height as needed for mobile */
+        height: 150px; /* Adjust the height as needed for mobile */
     }
 
     #numecompanie h1 {
-        font-size: 20px; /* Adjust the font size for mobile */
+        font-size: 100px; /* Adjust the font size for mobile */
     }
 
     
     .flex-container a {
         display: block;
-        font-size: 14px;
+        font-size: 40px;
         padding-left: 5px;
         padding-right: 5px;
         margin-left: 10;
@@ -470,3 +470,7 @@ input[type="time"] {
     width: 450px;
     height: 300px;
 }
+
+
+/* -------------------------------------------------------------------------------------------- */
+
