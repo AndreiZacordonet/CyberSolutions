@@ -9,12 +9,13 @@ function headerTemplate(){
         <nav class="flex-container">
             <a onclick="schimbaContinut('acasa')">Acasă</a>
             <a onclick="schimbaContinut('despre')">Despre</a>
-            <a onclick="schimbaContinut('inregistreaza')">Înregistrează-te</a>
+            <a onclick="schimbaContinut('inregistreaza', 'register', 'js/script.js')">Înregistrează-te</a>
             <a onclick="schimbaContinut('desen')">Desene</a>
             <a onclick="schimbaContinut('video')">Videoclipuri</a>
             <a onclick="schimbaContinut('invat', 'initialLoad', 'js/script.js')">Învăț</a>
             <a onclick="schimbaContinut('persoane', 'incarcaPersoane', 'js/persoane.js')">Persoane</a>
             <a onclick="schimbaContinut('verifica', 'verifyUsers', 'js/script.js')">Login</a>
+            <a onclick="schimbaContinut('cumparaturi', 'shopping', 'js/cumparaturi.js')">Cumpărături</a>
         </nav>
 
         <!-- <button onclick="toggleDropdown()">Meniu</button> -->
@@ -65,12 +66,13 @@ function footerTemplate(){
         <nav id="main-menu">
             <a onclick="schimbaContinut('acasa')">Acasă</a>
             <a onclick="schimbaContinut('despre')">Despre</a>
-            <a onclick="schimbaContinut('inregistreaza')">Înregistrează-te</a>
+            <a onclick="schimbaContinut('inregistreaza', 'register', 'js/script.js')">Înregistrează-te</a>
             <a onclick="schimbaContinut('desen')">Desene</a>
             <a onclick="schimbaContinut('video')">Videoclipuri</a>
             <a onclick="schimbaContinut('invat', 'initialLoad', 'js/script.js')">Învăț</a>
             <a onclick="schimbaContinut('persoane', 'incarcaPersoane', 'js/persoane.js')">Persoane</a>
             <a onclick="schimbaContinut('verifica', 'verifyUsers', 'js/script.js')">Login</a>
+            <a onclick="schimbaContinut('cumparaturi', 'shopping', 'js/cumparaturi.js')">Cumpărături</a>
         </nav>
         <div class="social-icons">
             <a href="https://www.linkedin.com/" class="social"><img src="imagini/linkedin-icon.jpg" alt="LinkedIn"></a>
@@ -88,7 +90,7 @@ function footerTemplate(){
     function initialLoad() {
         // date time info
         window.savedInterval = setInterval(() => {
-            document.getElementById('oraData').innerHTML =  new Date().toLocaleString();;
+            document.getElementById('oraData').innerHTML =  new Date().toLocaleString();
         }, 1000);
         // rest of data
         displayAllInfo();
@@ -306,45 +308,77 @@ function verifyUsers() {
 
 //--------------------------------------------------------------------------------------------------------------//
 // ajax update user-data
-// document.getElementById('registerForm').addEventListener('submit', function (event) {
+function register(){
+    let btn = document.getElementById('register');
+    btn.addEventListener('click', function(event){
+        event.preventDefault();
+        const xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '/api/utilizatori', true);   // true = asyncrounous
+        xhttp.setRequestHeader('Content-Type', 'application/json');
 
-// });
-        // document.getElementById('registerForm').addEventListener('submit', function (event) {
-        //     event.preventDefault();
-        //     event.stopPropagation();
-        //     const xhttp = new XMLHttpRequest();
-        //     xhttp.open('POST', '/api/utilizatori', true);   // true = asyncrounous
-        //     xhttp.setRequestHeader('Content-Type', 'application/json');
+        // Get form data
+        const formData = new FormData(document.getElementById('regForm'));
+        const formDataObject = {};
+        formData.forEach((value, key) => {
+            formDataObject[key] = value;
+        });
+
+        // Convert form data to JSON
+        const jsonData = JSON.stringify(formDataObject);
+
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState === XMLHttpRequest.DONE) {
+                if (xhttp.status === 200) {
+                    console.log('Login successful');
+                    // Handle successful login
+                } else {
+                    console.error('Login failed');
+                    // Handle login failure
+                }
+            }
+        };
+
+        xhttp.send(jsonData);
+    });
+}
+    //     document.getElementById('registerForm').addEventListener('submit', function (event) {
+    //         event.preventDefault();
+    //         event.stopPropagation();
+    //         const xhttp = new XMLHttpRequest();
+    //         xhttp.open('POST', '/api/utilizatori', true);   // true = asyncrounous
+    //         xhttp.setRequestHeader('Content-Type', 'application/json');
 
 
-        //     // Get form data
-        //     const formData = new FormData(this);
-        //     const formDataObject = {};
-        //     formData.forEach((value, key) => {
-        //         formDataObject[key] = value;
-        //     });
+    //         // Get form data
+    //         const formData = new FormData(this);
+    //         const formDataObject = {};
+    //         formData.forEach((value, key) => {
+    //             formDataObject[key] = value;
+    //         });
 
-        //     // Convert form data to JSON
-        //     const jsonData = JSON.stringify(formDataObject);
+    //         // Convert form data to JSON
+    //         const jsonData = JSON.stringify(formDataObject);
 
-        //     xhttp.onreadystatechange = function () {
-        //         if (xhttp.readyState === XMLHttpRequest.DONE) {
-        //             if (xhttp.status === 200) {
-        //                 console.log('Login successful');
-        //                 // Handle successful login
-        //             } else {
-        //                 console.error('Login failed');
-        //                 // Handle login failure
-        //             }
-        //         }
-        //     };
+    //         xhttp.onreadystatechange = function () {
+    //             if (xhttp.readyState === XMLHttpRequest.DONE) {
+    //                 if (xhttp.status === 200) {
+    //                     console.log('Login successful');
+    //                     // Handle successful login
+    //                 } else {
+    //                     console.error('Login failed');
+    //                     // Handle login failure
+    //                 }
+    //             }
+    //         };
 
-        //     xhttp.send(jsonData);
-        // });
+    //         xhttp.send(jsonData);
+    //     });
     // }
 
 //--------------------------------------------------------------------------------------------------------------//
 // age function 
+
+
 function varsta(){
     document.getElementById('varsta').addEventListener('input', function () {
         const varstaValueSpan = document.getElementById('varstaValue');

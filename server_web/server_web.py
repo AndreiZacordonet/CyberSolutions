@@ -89,12 +89,15 @@ def clientHandler(clientsocket, _):
         if resource == '/api/utilizatori':
             print("--Post method--")
             data = cerere.split('\n')[-1]
-            data = list(data.split('&'))
+            data = data.replace('"', '').replace('{', '').replace('}', '')
+            data = list(data.split(','))
+            print(data)
             ddata = {}
             for elem in data:
-                key, value = elem.split('=')
+                key = elem[0:elem.index(':')]
+                value = elem[elem.index(':') + 1:-1]
                 ddata[key] = value
-
+                
             with open('continut/resurse/utilizatori.json', 'r') as f:
                 data = json.load(f)
             data.append(ddata)
