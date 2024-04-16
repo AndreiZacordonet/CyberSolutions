@@ -1,24 +1,11 @@
 import socket
 import gzip
-# import imageio as iio
+import threading
 
-# creeaza un server socket
-serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-# specifica ca serverul va rula pe portul 5678, accesibil de pe orice ip al serverului
-serversocket.bind(('', 5678))
-
-# serverul poate accepta conexiuni; specifica cati clienti pot astepta la coada
-serversocket.listen(5)
-
-while True:
-    print('#########################################################################')
-    print('Serverul asculta potentiali clienti.')
-    # asteapta conectarea unui client la server
-    # metoda `accept` este blocanta => clientsocket, care reprezinta socket-ul corespunzator clientului conectat
-    clientsocket, address = serversocket.accept()
-    print('S-a conectat un client.')
-    # se proceseaza cererea si se citeste prima linie de text
+def clientHandler(clientsocket, _):
+    '''
+    Receives a socket object and manages clients its requests
+    '''
     cerere = ''
     linieDeStart = ''
     resource = ''
@@ -42,7 +29,7 @@ while True:
     
     if not resource:
         # received data is empty
-        continue
+        return      # continue
 
     response = bytes()
     tip = resource.split('.')[-1]
@@ -87,5 +74,24 @@ while True:
         clientsocket.sendall(response)
         clientsocket.close()
 
-print('S-a terminat cititrea.')
-print('S-a terminat comunicarea cu clientul.')
+if __name__ == '__main__':
+    # creeaza un server socket
+    serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    # specifica ca serverul va rula pe portul 5678, accesibil de pe orice ip al serverului
+    serversocket.bind(('', 5678))
+
+    # serverul poate accepta conexiuni; specifica cati clienti pot astepta la coada
+    serversocket.listen(5)
+
+    while True:
+        print('#########################################################################')
+        print('Serverul asculta potentiali clienti.')
+        # asteapta conectarea unui client la server
+        # metoda `accept` este blocanta => clientsocket, care reprezinta socket-ul corespunzator clientului conectat
+        clientsocket, address = serversocket.accept()
+        print('S-a conectat un client.')
+
+        clientThread = threading.Thread(target=clientHandler, args=(clientsocket, '_'))
+        clientThread.start()
+        
