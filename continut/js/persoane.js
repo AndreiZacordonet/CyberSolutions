@@ -33,6 +33,29 @@ function incarcaPersoane() {
                 
             }
 
+            const style = document.createElement('style');
+            style.innerHTML = `
+                                table {
+                                    border-collapse: collapse;
+                                    width: 100%;
+                                }
+
+                                th, td {
+                                    border: 2px solid #20608B;
+                                    text-align: left;
+                                    padding: 8px;
+                                }
+
+                                th {
+                                    background-color: #4db9c7;
+                                }
+
+                                tr:nth-child(even) {
+                                    background-color: #f2f2f2;
+                                }
+                            `;
+            document.head.appendChild(style);
+
             section.innerHTML = '';
             section.appendChild(table);
         } else {
