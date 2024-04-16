@@ -1,17 +1,17 @@
-<form class="regForm">
+<form class="regForm" id="registerForm" method="post" action="/api/utilizatori">
     <section>
        <h3 class="regForm">Informații generale</h3>
-    Nume utilizator: <input type="text" id="nume_utilizator" name="nume_utilizator" placeholder="Andrei74C0">
-    <br>
-    Parola: <input type="password" id="parola" name="parola" >
-    <br>
-    Nume: <input type="text" id="nume" name="nume" placeholder="Zacordoneț">
-    <br>
-    Prenume: <input type="text" id="prenume" name="prenume" placeholder="Andrei">
-    <br>
-    Email: <input type="email" id="email" name="email" placeholder="andrei.zacordonet@gmail.com">
-    <br>
-    Telefon: <input type="tel" id="telefon" name="telefon" placeholder="0754374397"> 
+        Nume utilizator: <input type="text" id="nume_utilizator" name="nume_utilizator" placeholder="Andrei74C0">
+        <br>
+        Parola: <input type="password" id="parola" name="parola" >
+        <br>
+        Nume: <input type="text" id="nume" name="nume" placeholder="Zacordoneț">
+        <br>
+        Prenume: <input type="text" id="prenume" name="prenume" placeholder="Andrei">
+        <br>
+        Email: <input type="email" id="email" name="email" placeholder="andrei.zacordonet@gmail.com">
+        <br>
+        Telefon: <input type="tel" id="telefon" name="telefon" placeholder="0754374397"> 
     </section>
 
     <section>
@@ -36,6 +36,7 @@
         Ora nașterii: <input type="time" id="ora_nastere" name="ora_nastere">
         <br>
         Vârstă: <input type="range" id="varsta" name="varsta" min="18">
+        <span id="varstaValue">18</span>
         <br>
         Adresa paginii personale: <input type="url" id="adresa_pagina_personala" name="adresa_pagina_personala">
         <br>
@@ -43,6 +44,6 @@
     
         <br>
         <br>
-        <button disabled>Înregistrează</button>
+        <button type="submit" id="register">Înregistrează</button>
     </section>
 </form>

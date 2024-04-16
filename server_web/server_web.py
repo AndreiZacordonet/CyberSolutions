@@ -1,6 +1,7 @@
 import socket
 import gzip
 import threading
+import json
 
 def clientHandler(clientsocket, _):
     '''
@@ -9,6 +10,7 @@ def clientHandler(clientsocket, _):
     cerere = ''
     linieDeStart = ''
     resource = ''
+    requestType = ''
     while True:
         data = clientsocket.recv(1024)
         cerere = cerere + data.decode()
@@ -23,7 +25,7 @@ def clientHandler(clientsocket, _):
             linieDeStart = cerere[0:pozitie]
             print('S-a citit linia de start din cerere: ##### ' + linieDeStart + '#####')
             resource = linieDeStart.split(' ')[1]
-            resource = 'continut' + resource
+            requestType = linieDeStart.split(' ')[0]
             print(resource + ", type: " + str(type(resource)))
             break
     
@@ -31,52 +33,90 @@ def clientHandler(clientsocket, _):
         # received data is empty
         return      # continue
 
-    response = bytes()
-    tip = resource.split('.')[-1]
-    match tip:
-        case 'ico':
-            tip = "image/x-icon"
-        case 'png':
-            tip = 'image/png'
-        case 'jpeg' | 'jpg':
-            tip = 'image/jpeg'
-        case 'css':
-            tip = "text/css"
-        case 'html':
-            tip = 'text/html'
-        case 'js':
-            tip = 'application/javascript'
-        case 'xml':
-            tip = 'text/xml'
-            resource = resource.replace('continut', 'continut/resurse')
-        case 'gif':
-            tip = 'text/gif'
-        case 'json':
-            tip = 'application/json'
-            resource = resource.replace('continut', 'continut/resurse')
-        case _:
-            tip = 'text/plain'
+    if requestType == 'GET':
+        resource = 'continut' + resource
+        if resource.find('api') != -1:
+            resource = 'continut/index.html'
+        response = bytes()
+        tip = resource.split('.')[-1]
+        match tip:
+            case 'ico':
+                tip = "image/x-icon"
+            case 'png':
+                tip = 'image/png'
+            case 'jpeg' | 'jpg':
+                tip = 'image/jpeg'
+            case 'css':
+                tip = "text/css"
+            case 'html':
+                tip = 'text/html'
+            case 'js':
+                tip = 'application/javascript'
+            case 'xml':
+                tip = 'text/xml'
+                resource = resource.replace('continut', 'continut/resurse')
+            case 'gif':
+                tip = 'text/gif'
+            case 'json':
+                tip = 'application/json'
+                resource = resource.replace('continut', 'continut/resurse')
+            case _:
+                tip = 'text/plain'
 
-    try:
-        print('calea: ' + resource)
-        f = open(resource, 'rb')
-        # citim fisierul
-        file_content = f.read()
-        f.close()
-        file_content = gzip.compress(file_content)
-        response = 'HTTP/1.1 200 OK\r\n'.encode()
-        response += f'Content-Length: {str(len(file_content))}\r\n'.encode()
-        response += f'Content-Type: {tip}; charset=utf-8\r\n'.encode()
-        response += 'Content-Encoding: gzip\r\n'.encode()
-        response += 'Server: localhost\r\n\r\n'.encode()
-        response += file_content
-    except FileNotFoundError:
-        print('Fisierul nu a fost gasit')
-        response = 'HTTP/1.1 404 Not Found\r\n'.encode()
-    finally:
-        print(response)
-        clientsocket.sendall(response)
-        clientsocket.close()
+        try:
+            print('calea: ' + resource)
+            f = open(resource, 'rb')
+            # citim fisierul
+            file_content = f.read()
+            f.close()
+            file_content = gzip.compress(file_content)
+            response = 'HTTP/1.1 200 OK\r\n'.encode()
+            response += f'Content-Length: {str(len(file_content))}\r\n'.encode()
+            response += f'Content-Type: {tip}; charset=utf-8\r\n'.encode()
+            response += 'Content-Encoding: gzip\r\n'.encode()
+            response += 'Server: localhost\r\n\r\n'.encode()
+            response += file_content
+        except (FileNotFoundError, OSError):
+            print('Fisierul nu a fost gasit')
+            response = 'HTTP/1.1 404 Not Found\r\n'.encode()
+        finally:
+            print(response)
+            clientsocket.sendall(response)
+            clientsocket.close()
+
+    if requestType == 'POST':
+        print('|'+resource+'|')
+        if resource == '/api/utilizatori':
+            print("--Post method--")
+            data = cerere.split('\n')[-1]
+            data = list(data.split('&'))
+            ddata = {}
+            for elem in data:
+                key, value = elem.split('=')
+                ddata[key] = value
+
+            with open('continut/resurse/utilizatori.json', 'r') as f:
+                data = json.load(f)
+            data.append(ddata)
+
+            with open('continut/resurse/utilizatori.json', 'w') as f:
+                json.dump(data, f, indent=4)
+
+            f = open('continut/index.html', 'rb')
+            # citim fisierul
+            file_content = f.read()
+            f.close()
+            file_content = gzip.compress(file_content)
+            response = 'HTTP/1.1 200 OK\r\n'.encode()
+            response += f'Content-Length: {str(len(file_content))}\r\n'.encode()
+            response += 'Content-Type: text/html; charset=utf-8\r\n'.encode()
+            response += 'Content-Encoding: gzip\r\n'.encode()
+            response += 'Server: localhost\r\n\r\n'.encode()
+            response += file_content
+            print(response)
+            clientsocket.sendall(response)
+            clientsocket.close()
+            
 
 if __name__ == '__main__':
     # creeaza un server socket

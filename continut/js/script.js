@@ -235,7 +235,6 @@ function schimbaContinut(file, jsFun, jsFile) {
         document.getElementById("continut").innerHTML = this.responseText;
 
         // let script = document.createElement('script');
-
         if (jsFile) {
             let elementScript = document.createElement('script');
             elementScript.onload = function () {
@@ -304,3 +303,53 @@ function verifyUsers() {
     xhttp.send();
 
 }
+
+//--------------------------------------------------------------------------------------------------------------//
+// ajax update user-data
+// document.getElementById('registerForm').addEventListener('submit', function (event) {
+
+// });
+        // document.getElementById('registerForm').addEventListener('submit', function (event) {
+        //     event.preventDefault();
+        //     event.stopPropagation();
+        //     const xhttp = new XMLHttpRequest();
+        //     xhttp.open('POST', '/api/utilizatori', true);   // true = asyncrounous
+        //     xhttp.setRequestHeader('Content-Type', 'application/json');
+
+
+        //     // Get form data
+        //     const formData = new FormData(this);
+        //     const formDataObject = {};
+        //     formData.forEach((value, key) => {
+        //         formDataObject[key] = value;
+        //     });
+
+        //     // Convert form data to JSON
+        //     const jsonData = JSON.stringify(formDataObject);
+
+        //     xhttp.onreadystatechange = function () {
+        //         if (xhttp.readyState === XMLHttpRequest.DONE) {
+        //             if (xhttp.status === 200) {
+        //                 console.log('Login successful');
+        //                 // Handle successful login
+        //             } else {
+        //                 console.error('Login failed');
+        //                 // Handle login failure
+        //             }
+        //         }
+        //     };
+
+        //     xhttp.send(jsonData);
+        // });
+    // }
+
+//--------------------------------------------------------------------------------------------------------------//
+// age function 
+function varsta(){
+    document.getElementById('varsta').addEventListener('input', function () {
+        const varstaValueSpan = document.getElementById('varstaValue');
+        // Update the span element with the current value of the range input
+        varstaValueSpan.textContent = varstaInput.value;
+    });
+}
+
