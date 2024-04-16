@@ -48,6 +48,7 @@ def clientHandler(clientsocket, _):
             tip = 'application/javascript'
         case 'xml':
             tip = 'text/xml'
+            resource = resource.replace('continut', 'continut/resurse')
         case 'gif':
             tip = 'text/gif'
         case _:

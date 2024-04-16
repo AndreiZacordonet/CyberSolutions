@@ -13,6 +13,7 @@ function headerTemplate(){
             <a onclick="schimbaContinut('desen')">Desene</a>
             <a onclick="schimbaContinut('video')">Videoclipuri</a>
             <a onclick="schimbaContinut('invat', 'initialLoad', 'js/script.js')">Învăț</a>
+            <a onclick="schimbaContinut('persoane', 'incarcaPersoane', 'js/persoane.js')">Persoane</a>
         </nav>
 
         <!-- <button onclick="toggleDropdown()">Meniu</button> -->
@@ -67,6 +68,7 @@ function footerTemplate(){
             <a onclick="schimbaContinut('desen')">Desene</a>
             <a onclick="schimbaContinut('video')">Videoclipuri</a>
             <a onclick="schimbaContinut('invat', 'initialLoad', 'js/script.js')">Învăț</a>
+            <a onclick="schimbaContinut('persoane', 'incarcaPersoane', 'js/persoane.js')">Persoane</a>
         </nav>
         <div class="social-icons">
             <a href="https://www.linkedin.com/" class="social"><img src="imagini/linkedin-icon.jpg" alt="LinkedIn"></a>
@@ -230,16 +232,34 @@ function schimbaContinut(file, jsFun, jsFile) {
     xhttp.onload = function() {
         document.getElementById("continut").innerHTML = this.responseText;
 
-        let script = document.createElement('script');
-        if (jsFun && jsFile)
-        {
-            script.src = jsFile;
-            script.onload = function(){
-                window[jsFun]();
+        // let script = document.createElement('script');
+
+        if (jsFile) {
+            let elementScript = document.createElement('script');
+            elementScript.onload = function () {
+                console.log("hello");
+                if (jsFun) {
+                    window[jsFun]();
+                }
             };
-            document.body.appendChild(script);
+            elementScript.src = jsFile;
+            document.head.appendChild(elementScript);
+        } else {
+            if (jsFun) {
+                window[jsFun]();
+            }
         }
+        // if (jsFun && jsFile)
+        // {
+        //     script.src = jsFile;
+        //     script.onload = function(){
+        //         window[jsFun]();
+        //     };
+        //     document.body.appendChild(script);
+        // }
     };
+
+    history.replaceState(null, document.title, window.location.pathname + window.location.search); // removing the #sectionID from URL
     xhttp.open("GET", file + '.html');
     xhttp.send();
 }
