@@ -51,6 +51,9 @@ def clientHandler(clientsocket, _):
             resource = resource.replace('continut', 'continut/resurse')
         case 'gif':
             tip = 'text/gif'
+        case 'json':
+            tip = 'application/json'
+            resource = resource.replace('continut', 'continut/resurse')
         case _:
             tip = 'text/plain'
 
