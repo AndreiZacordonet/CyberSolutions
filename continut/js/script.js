@@ -14,6 +14,7 @@ function headerTemplate(){
             <a onclick="schimbaContinut('video')">Videoclipuri</a>
             <a onclick="schimbaContinut('invat', 'initialLoad', 'js/script.js')">Învăț</a>
             <a onclick="schimbaContinut('persoane', 'incarcaPersoane', 'js/persoane.js')">Persoane</a>
+            <a onclick="schimbaContinut('verifica', 'verifyUsers', 'js/script.js')">Login</a>
         </nav>
 
         <!-- <button onclick="toggleDropdown()">Meniu</button> -->
@@ -69,6 +70,7 @@ function footerTemplate(){
             <a onclick="schimbaContinut('video')">Videoclipuri</a>
             <a onclick="schimbaContinut('invat', 'initialLoad', 'js/script.js')">Învăț</a>
             <a onclick="schimbaContinut('persoane', 'incarcaPersoane', 'js/persoane.js')">Persoane</a>
+            <a onclick="schimbaContinut('verifica', 'verifyUsers', 'js/script.js')">Login</a>
         </nav>
         <div class="social-icons">
             <a href="https://www.linkedin.com/" class="social"><img src="imagini/linkedin-icon.jpg" alt="LinkedIn"></a>
@@ -226,7 +228,7 @@ function footerTemplate(){
 }
 
 //--------------------------------------------------------------------------------------------------------------//
-// ajax fun
+// ajax fun MAIN
 function schimbaContinut(file, jsFun, jsFile) {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
@@ -262,4 +264,43 @@ function schimbaContinut(file, jsFun, jsFile) {
     history.replaceState(null, document.title, window.location.pathname + window.location.search); // removing the #sectionID from URL
     xhttp.open("GET", file + '.html');
     xhttp.send();
+}
+
+//--------------------------------------------------------------------------------------------------------------//
+// ajax verify users
+function verifyUsers() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("GET", 'utilizatori.json');
+
+    xhttp.onload = function () {
+        if (xhttp.status === 200) {
+            const jsonDoc = JSON.parse(xhttp.responseText);
+            
+            document.getElementById('credCheck').addEventListener('click', function () {
+                let user = document.getElementById('usernameV').value;
+                let pass = document.getElementById('passwordV').value;
+                for (let i = 0; i < jsonDoc.length; i ++)
+                {
+                    if (jsonDoc[i].utilizator === user && jsonDoc[i].parola === pass)
+                    {
+                        let result = document.getElementById('loginResult');
+                        result.style.color = 'green';
+                        result.innerHTML = `User verificat cu succes!`;
+                    }
+                    else{
+                        let result = document.getElementById('loginResult');
+                        result.style.color = 'red';
+                        result.innerHTML = `Username sau parolă greșită!`;
+                    }
+                }
+                
+            });
+            
+        } else {
+            console.error('Error loading XML file');
+        }
+    };
+
+    xhttp.send();
+
 }
