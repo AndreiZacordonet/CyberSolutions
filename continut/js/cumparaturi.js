@@ -16,9 +16,25 @@ function shopping(){
         // Handle the message received from the worker
         const data = event.data;
         console.log('Received message from worker:', data);
+        console.log('Received message type:', typeof(data));
 
         // Add a new row to the table with the data received from the worker
         // addRowToTable(data);
+
+        let table = document.getElementById('shoppingTable');
+        const row = table.insertRow(-1);
+        const td1 = document.createElement('td');
+        console.log(data.nume);
+        td1.textContent = Product.id;
+        row.appendChild(td1);
+
+        const td2 = document.createElement('td');
+        td2.textContent = data.nume;
+        row.appendChild(td2);
+
+        const td3 = document.createElement('td');
+        td3.textContent = data.cantitate;
+        row.appendChild(td3);
     });
 
     let btn = document.getElementById('adaugaBtn');
@@ -26,7 +42,18 @@ function shopping(){
         event.preventDefault();
         // Get input values
         const nume = document.getElementById('nume').value;
-        const cantitate = document.getElementById('cantitate').value;
+        const cantitate = parseInt(document.getElementById('cantitate').value);
+
+        if (nume == "")
+        {
+            alert("Completează datele!");
+            return;
+        }
+        if (typeof cantitate !== 'number' || isNaN(cantitate) || cantitate < 1)
+        {
+            alert("Nu este o cantitate validă!");
+            return;
+        }
 
         // Create a new Product object
         const product = new Product(nume, cantitate);
