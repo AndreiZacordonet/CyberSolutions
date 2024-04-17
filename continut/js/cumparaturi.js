@@ -8,6 +8,39 @@ class Product {
     }
 }
 
+class Storage {
+    constructor() {
+    }
+
+    // addItem(product) {
+    // }
+
+    // updateItem(itemId, newItem) {
+    // }
+
+    // deleteItem(itemId) {
+    // }
+
+    // getAllItems() {
+    // }
+}
+
+class LocalStorage extends Storage{
+    constructor(){
+        super();
+    }
+}
+
+LocalStorage.prototype.add = function saveProduct(product) {
+    // Retrieve existing products from localStorage or initialize an empty array
+    let products = JSON.parse(localStorage.getItem('products')) || [];
+    console.log('ciorba de gainaaaaaa');
+    // Add the new product to the array
+    products.push(product);
+
+    // Save the updated array back to localStorage
+    localStorage.setItem('products', JSON.stringify(products));
+};
 
 function shopping(){
     const worker = new Worker('js/worker.js');
@@ -19,8 +52,6 @@ function shopping(){
         console.log('Received message type:', typeof(data));
 
         // Add a new row to the table with the data received from the worker
-        // addRowToTable(data);
-
         let table = document.getElementById('shoppingTable');
         const row = table.insertRow(-1);
         const td1 = document.createElement('td');
@@ -61,20 +92,23 @@ function shopping(){
         worker.postMessage(product);
 
         // Save product to localStorage
-        saveProduct(product);
+        const locStor = new LocalStorage();
+        locStor.add(product);
+
+        // saveProduct(product);
     });
 }
 
 
 
 // Function to save product to localStorage
-function saveProduct(product) {
-    // Retrieve existing products from localStorage or initialize an empty array
-    let products = JSON.parse(localStorage.getItem('products')) || [];
+// function saveProduct(product) {
+//     // Retrieve existing products from localStorage or initialize an empty array
+//     let products = JSON.parse(localStorage.getItem('products')) || [];
 
-    // Add the new product to the array
-    products.push(product);
+//     // Add the new product to the array
+//     products.push(product);
 
-    // Save the updated array back to localStorage
-    localStorage.setItem('products', JSON.stringify(products));
-}
+//     // Save the updated array back to localStorage
+//     localStorage.setItem('products', JSON.stringify(products));
+// }
