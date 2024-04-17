@@ -279,6 +279,7 @@ function verifyUsers() {
             document.getElementById('credCheck').addEventListener('click', function () {
                 let user = document.getElementById('usernameV').value;
                 let pass = document.getElementById('passwordV').value;
+                
                 for (let i = 0; i < jsonDoc.length; i ++)
                 {
                     if (jsonDoc[i].utilizator === user && jsonDoc[i].parola === pass)
@@ -326,11 +327,15 @@ function register(){
         // Convert form data to JSON
         const jsonData = JSON.stringify(formDataObject);
 
+        
+
         xhttp.onreadystatechange = function () {
             if (xhttp.readyState === XMLHttpRequest.DONE) {
                 if (xhttp.status === 200) {
                     console.log('Register successful');
                     // Handle successful Register
+                    document.getElementById("regForm").reset();
+                    alert("Data submited succesfully");
                 } else {
                     console.error('Register failed');
                     // Handle Register failure
