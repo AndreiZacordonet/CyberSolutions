@@ -276,7 +276,6 @@ function verifyUsers() {
     xhttp.onload = function () {
         if (xhttp.status === 200) {
             const jsonDoc = JSON.parse(xhttp.responseText);
-            
             document.getElementById('credCheck').addEventListener('click', function () {
                 let user = document.getElementById('usernameV').value;
                 let pass = document.getElementById('passwordV').value;
@@ -287,6 +286,7 @@ function verifyUsers() {
                         let result = document.getElementById('loginResult');
                         result.style.color = 'green';
                         result.innerHTML = `User verificat cu succes!`;
+                        break;
                     }
                     else{
                         let result = document.getElementById('loginResult');
@@ -329,11 +329,11 @@ function register(){
         xhttp.onreadystatechange = function () {
             if (xhttp.readyState === XMLHttpRequest.DONE) {
                 if (xhttp.status === 200) {
-                    console.log('Login successful');
-                    // Handle successful login
+                    console.log('Register successful');
+                    // Handle successful Register
                 } else {
-                    console.error('Login failed');
-                    // Handle login failure
+                    console.error('Register failed');
+                    // Handle Register failure
                 }
             }
         };
