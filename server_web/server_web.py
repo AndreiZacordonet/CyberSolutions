@@ -96,8 +96,9 @@ def clientHandler(clientsocket, _):
             for elem in data:
                 key = elem[0:elem.index(':')]
                 value = elem[elem.index(':') + 1:]
+                value += ''
                 ddata[key] = value
-                
+            print(ddata)
             with open('continut/resurse/utilizatori.json', 'r') as f:
                 data = json.load(f)
             data.append(ddata)

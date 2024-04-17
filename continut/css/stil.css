@@ -126,6 +126,7 @@ a:hover {
     /* Links */
     a {
         color: #20608B;
+        cursor: pointer;
     }
     a:hover {
         color: #4db9c7; 
@@ -164,7 +165,7 @@ footer {
 footer > nav a {
     color: black;
     padding: 0;
-    text-decoration: none;
+    /* text-decoration: none; */
     margin: 0 10px;
 }
 
