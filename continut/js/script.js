@@ -75,8 +75,8 @@ function footerTemplate(){
             <a onclick="schimbaContinut('cumparaturi', 'shopping', 'js/cumparaturi.js')">Cumpărături</a>
         </nav>
         <div class="social-icons">
-            <a href="https://www.linkedin.com/" class="social"><img src="imagini/linkedin-icon.jpg" alt="LinkedIn"></a>
-            <a href="https://www.facebook.com/" class="social"><img src="imagini/facebook-icon.jpg" alt="Facebook"></a>
+            <a href="https://www.linkedin.com/in/andrei-zacordone%C8%9B/" class="social"><img src="imagini/linkedin-icon.jpg" alt="LinkedIn"></a>
+            <a href="https://www.facebook.com/andrei.zacordonet" class="social"><img src="imagini/facebook-icon.jpg" alt="Facebook"></a>
         </div>
         <div style="padding-left: 20px;">&copy; 2024. CyberSolutions. All rights reserved.</div>
     `;
